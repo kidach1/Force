@@ -20,9 +20,11 @@ public class Move : MonoBehaviour {
 			moveDirection = Vector3.zero;
 		}
 
-		if (Input.GetButton ("Jump")) {
-			if (transform.position.y > 1.65f) {
-				moveDirection.y = Random.Range(-0.05f, 0.05f);
+        //		if (Input.GetButton ("Jump")) {
+        if (OVRInput.Get(OVRInput.RawAxis1D.LIndexTrigger) != 0.0f)
+        {
+            if (transform.position.y > 2.65f) {
+				moveDirection.y = Random.Range(-0.1f, 0.1f);
 			} else {
 				moveDirection.y = jumpSpeed;
 //				moveDirection.y += gravity * Time.deltaTime;

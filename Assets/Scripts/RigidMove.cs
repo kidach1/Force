@@ -10,13 +10,15 @@ public class RigidMove : MonoBehaviour {
 	}
 	
 	void Update () {
-		if (Input.GetButton ("Jump")) {
-			if (transform.position.y > 1.65f) {
+        //		if (Input.GetButton ("Jump")) {
+        if (OVRInput.Get(OVRInput.RawAxis1D.LHandTrigger) != 0.0f)
+        {
+            if (transform.position.y > 2.65f) {
 				Debug.Log ("aa");
-				rb.AddForce (Vector3.up * 15f);
+				rb.AddForce (Vector3.up * 1f);
 			} else {
 				Debug.Log ("bb");
-				rb.AddForce (Vector3.up * 17f);
+				rb.AddForce (Vector3.up * 3f);
 			}
 		}
 	}

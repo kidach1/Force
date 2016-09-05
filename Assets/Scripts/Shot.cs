@@ -10,7 +10,7 @@ public class Shot : MonoBehaviour {
 	}
 	
 	void Update () {
-		transform.position += transform.forward * Time.deltaTime * 10;
+		transform.position += transform.forward * Time.deltaTime * 20;
 	}
 
 	private void OnCollisionEnter(Collision collider) {
@@ -18,5 +18,12 @@ public class Shot : MonoBehaviour {
 			Destroy(gameObject);
 			Instantiate (explosion, transform.position, transform.rotation);
 		}
-	}
+        if (collider.gameObject.tag == "Cube")
+        {
+            Destroy(gameObject);
+            Destroy(collider.gameObject);
+
+            Instantiate(explosion, transform.position, transform.rotation);
+        }
+    }
 }
