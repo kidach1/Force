@@ -6,7 +6,7 @@ public class Move : MonoBehaviour {
 	CharacterController controller;
 
 	private Vector3 moveDirection = Vector3.zero;
-	float jumpSpeed = 0.2f;
+	float jumpSpeed = 0.8f;
 	//	public float gravity = 9.8f;
 	float gravity = 3.0f;
 
@@ -21,9 +21,9 @@ public class Move : MonoBehaviour {
 		}
 
         //		if (Input.GetButton ("Jump")) {
-        if (OVRInput.Get(OVRInput.RawAxis1D.LIndexTrigger) != 0.0f)
+        if (OVRInput.Get(OVRInput.RawAxis1D.RIndexTrigger) != 0.0f)
         {
-            if (transform.position.y > 2.65f) {
+            if (transform.position.y > 3.65f) {
 				moveDirection.y = Random.Range(-0.1f, 0.1f);
 			} else {
 				moveDirection.y = jumpSpeed;

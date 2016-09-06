@@ -11,15 +11,17 @@ public class RigidMove : MonoBehaviour {
 	
 	void Update () {
         //		if (Input.GetButton ("Jump")) {
-        if (OVRInput.Get(OVRInput.RawAxis1D.LHandTrigger) != 0.0f)
+        if (OVRInput.Get(OVRInput.RawAxis1D.LIndexTrigger) != 0.0f)
         {
             if (transform.position.y > 2.65f) {
-				Debug.Log ("aa");
 				rb.AddForce (Vector3.up * 1f);
 			} else {
-				Debug.Log ("bb");
 				rb.AddForce (Vector3.up * 3f);
 			}
 		}
-	}
+        if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick) != Vector2.zero)
+        {
+            rb.AddForce(OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick));
+        }
+    }
 }
