@@ -5,14 +5,18 @@ using System.Collections;
 public class Move : MonoBehaviour {
 	CharacterController controller;
 
-	private Vector3 moveDirection = Vector3.zero;
+    Vector3 prevHandPos = Vector3.zero;
+    Vector3 posDiff = Vector3.zero;
+
+    private Vector3 moveDirection = Vector3.zero;
 	float jumpSpeed = 0.8f;
 	//	public float gravity = 9.8f;
 	float gravity = 3.0f;
 
 	void Start () {
 		controller = GetComponent<CharacterController>();
-	}
+        prevHandPos = OVRInput.GetLocalControllerPosition(OVRInput.Controller.RTouch);
+    }
 	
 	void Update () {
 
@@ -29,10 +33,19 @@ public class Move : MonoBehaviour {
 				moveDirection.y = jumpSpeed;
 //				moveDirection.y += gravity * Time.deltaTime;
 			}
-		} else {
+
+            if (OVRInput.Get(OVRInput.RawAxis1D.RHandTrigger) != 0.0f)
+            {
+                posDiff = OVRInput.GetLocalControllerPosition(OVRInput.Controller.RTouch) - prevHandPos;
+                moveDirection += (posDiff * 3f);
+
+            }
+        } else {
 			moveDirection.y -= gravity * Time.deltaTime;
 		}
 
-		controller.Move (moveDirection * Time.deltaTime);
+        prevHandPos = OVRInput.GetLocalControllerPosition(OVRInput.Controller.RTouch);
+
+        controller.Move (moveDirection * Time.deltaTime);
 	}
 }
